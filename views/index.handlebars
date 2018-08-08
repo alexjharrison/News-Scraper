@@ -1,0 +1,51 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="left flow-text">Ars Scraper</a>
+        <ul id="nav-mobile" class="right hide-on-small">
+            <li><a href="/">Home</a></li>
+            <li><a href="/saved">Saved</a></li>
+            <li><button id="get-articles" class="waves-effect waves-light btn">Get New Articles</button></li>
+            <li><button id="drop-articles" class="waves-effect waves-light btn">Clear All Articles</button></li>
+        </ul>
+    </div>
+</nav>
+<div class="image-container valign-wrapper">
+        <div class="title center">
+            {{#if home}}
+            <h3>Ars Technica<h3>
+            <h4>Screen Scraper</h4>
+            {{else}}
+            <h3>Ars Technica<h3>
+            <h4>Saved Articles</h4>
+            {{/if}}
+        </div>
+    <img id="splash-img" src="assets/images/newspaper.jpg" alt="newspaper photo">
+</div>
+<div class="container">
+    <div class="row section">
+        {{#each this}}
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-image">
+                <img class="responsive-img" src="{{this.image}}">
+                </div>
+                <div class="card-content">
+                <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
+                <p>{{this.subHeadline}}</p>
+                </div>
+                <div class="card-action">
+                    {{#if home}}
+                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>yo</a>
+                    {{else}}
+                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Boo</a>
+                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>yah</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div> 
+
+
+

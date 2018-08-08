@@ -1,8 +1,8 @@
 var express = require("express");
-var handbars = require("express-handlebars");
+var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-var cheerio = require("cheerio");
+var logger = require("morgan");
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -15,16 +15,18 @@ mongoose.connect(MONGODB_URI);
 
 var app = express();
 
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json);
-app.use(express.static("public"));
-app.engine("handlebars",handbars({defaultLayout: "main"}));
+app.engine("handlebars",exphbs({defaultLayout: "main"}));
 app.set("view engine","handlebars");
 
-var routes = require("./routes/apiRoutes");
-app.use(routes);
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(express.static("public"));
+app.use(logger("dev"));
+
+require("./controllers/controller")(app);
 
 app.listen(PORT,(err)=>{
-    if (err) throw err;
+    if (err) console.log(err);
     console.log("Server started on port "+PORT);
 })
+

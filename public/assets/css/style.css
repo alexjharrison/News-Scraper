@@ -1,0 +1,29 @@
+body {
+    background-color: #f9f1f1;
+}
+
+li {
+    margin: 0 4px;
+}
+
+#splash-img {
+    width: 100%;
+    z-index: -1;
+}
+
+.image-container {
+    position: relative;
+}
+
+.title {
+    z-index: 0;
+    position:absolute;
+    top: 30%;
+    left: calc(40% - 10px);
+    text-shadow:
+    3px 3px 0 #b2dfdb,
+  -1px -1px 0 #b2dfdb,  
+   1px -1px 0 #b2dfdb,
+   -1px 1px 0 #b2dfdb,
+    1px 1px 0 #b2dfdb;
+}
