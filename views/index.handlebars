@@ -34,10 +34,10 @@
                             <img class="responsive-img" src="{{this.image}}">
                             </div>
                             <div class="card-content">
-                            <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
+                            <a target="_blank" href="{{this.url}}"><strong>{{this.title}}</strong></a>
                             <p>{{this.subHeadline}}</p>
                             </div>
-                            <div class="card-action">
+                            <div class="card-action center">
                                 <a data-id="{{this._id}}" class="save waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Save Article</a>
                             </div>
                         </div>
@@ -53,12 +53,12 @@
                             <img class="responsive-img" src="{{this.image}}">
                             </div>
                             <div class="card-content">
-                            <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
+                            <a target="_blank" href="{{this.url}}"><strong>{{this.title}}</strong></a>
                             <p>{{this.subHeadline}}</p>
                             </div>
                             <div class="card-action">
                                 <div class="row center">
-                                    <a class="waves-effect waves-light btn">Delete From Saved</a>
+                                    <a data-id="{{this._id}}" class="delete waves-effect waves-light btn">Delete From Saved</a>
                                 </div>
                                 <div class="row center">
                                     <a class="waves-effect waves-light btn">Article Notes</a>

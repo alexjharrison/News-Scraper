@@ -31,3 +31,8 @@ li {
    -1px 1px 0 #b2dfdb,
     1px 1px 0 #b2dfdb;
 }
+
+.card-image{
+    height: 250px; /* Your height here */
+    overflow: hidden;
+}

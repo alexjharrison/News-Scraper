@@ -1,4 +1,10 @@
 $(()=>{
+    if(!$(".card").attr("data-id")){
+        console.log(this);
+        $(this).remove();
+    }
+
+    
     $("#get-articles").click((e)=>{
         e.preventDefault();
         $.get("/newArticles",(data,status)=>{
@@ -17,8 +23,17 @@ $(()=>{
         e.preventDefault();
         var id = $(this).attr("data-id");
         console.log(id);
-        $.post("/article/"+id,(data,status)=>{
+        $.post("/savearticle/"+id,(data,status)=>{
             location.reload();
         })
     })
+    $(".delete").click(function(e){
+        e.preventDefault();
+        var id = $(this).attr("data-id");
+        console.log(id);
+        $.post("/removearticle/"+id,(data,status)=>{
+            location.reload();
+        })
+    })
+
 })
