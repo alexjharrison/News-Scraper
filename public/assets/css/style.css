@@ -6,6 +6,10 @@ li {
     margin: 0 4px;
 }
 
+.logo {
+    margin: 0 10px;
+}
+
 #splash-img {
     width: 100%;
     z-index: -1;

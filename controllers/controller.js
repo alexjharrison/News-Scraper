@@ -16,7 +16,6 @@ module.exports = (app) => {
             if (result[0]) empty = true;
             result.empty = empty;
             result.home = true;
-            console.log(result);
             res.render("index", result);
         })
     })
@@ -61,7 +60,12 @@ module.exports = (app) => {
         db.Article.remove({})
             .then(result => { db.Article.find({}, (err, r) => { res.json(r); }) })
         db.Note.remove({}).then(result => { });
-
+    })
+    app.post("/article/:id",(req,res)=>{
+        var id = req.params.id;
+        console.log(id)
+        db.Article.findOneAndUpdate({"_id":id},{saved:true})
+        .then((r)=>res.json(r))
     })
 
 

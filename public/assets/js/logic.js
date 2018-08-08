@@ -13,4 +13,12 @@ $(()=>{
             location.reload();
         });
     })
+    $(".save").click(function(e){
+        e.preventDefault();
+        var id = $(this).attr("data-id");
+        console.log(id);
+        $.post("/article/"+id,(data,status)=>{
+            location.reload();
+        })
+    })
 })

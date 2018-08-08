@@ -1,9 +1,11 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="/" class="left flow-text">Ars Scraper</a>
+        <a href="/" class="left flow-text logo">Ars Scraper</a>
+        <ul id="nav-mobile" class="left hide-on-small">
+            <li class="{{#if home}}active{{/if}}"><a href="/">Home</a></li>
+            <li class="{{#unless home}}active{{/unless}}"><a href="/saved">Saved</a></li>
+        </ul>
         <ul id="nav-mobile" class="right hide-on-small">
-            <li><a href="/">Home</a></li>
-            <li><a href="/saved">Saved</a></li>
             <li><button id="get-articles" class="waves-effect waves-light btn">Get New Articles</button></li>
             <li><button id="drop-articles" class="waves-effect waves-light btn">Clear All Articles</button></li>
         </ul>
@@ -23,27 +25,50 @@
 </div>
 <div class="container">
     <div class="row section">
-        {{#each this}}
-        <div class="col s12 m6 l4">
-            <div class="card">
-                <div class="card-image">
-                <img class="responsive-img" src="{{this.image}}">
-                </div>
-                <div class="card-content">
-                <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
-                <p>{{this.subHeadline}}</p>
-                </div>
-                <div class="card-action">
-                    {{#if home}}
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>yo</a>
-                    {{else}}
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Boo</a>
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>yah</a>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-        {{/each}}
+        {{#if home}}
+            {{#each this}}
+                {{#unless this.saved}}
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image">
+                            <img class="responsive-img" src="{{this.image}}">
+                            </div>
+                            <div class="card-content">
+                            <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
+                            <p>{{this.subHeadline}}</p>
+                            </div>
+                            <div class="card-action">
+                                <a data-id="{{this._id}}" class="save waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Save Article</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/unless}}
+            {{/each}}
+        {{else}}
+            {{#each this}}
+                {{#if this.saved}}
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image">
+                            <img class="responsive-img" src="{{this.image}}">
+                            </div>
+                            <div class="card-content">
+                            <a href="{{this.url}}"><strong>{{this.title}}</strong></a>
+                            <p>{{this.subHeadline}}</p>
+                            </div>
+                            <div class="card-action">
+                                <div class="row center">
+                                    <a class="waves-effect waves-light btn">Delete From Saved</a>
+                                </div>
+                                <div class="row center">
+                                    <a class="waves-effect waves-light btn">Article Notes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/each}}
+        {{/if}}
     </div>
 </div> 
 
