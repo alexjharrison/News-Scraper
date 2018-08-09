@@ -10,6 +10,8 @@ module.exports = (app) => {
     //     console.log(response);
     // })
 
+    var currentId;
+
     app.get("/", (req, res) => {
         var empty = false;
         db.Article.find({}).then(result => {
@@ -76,13 +78,35 @@ module.exports = (app) => {
         let id = req.params.id;
         console.log(id)
         db.Article.findOneAndUpdate({"_id":id},{saved:true})
-        .then((r)=>res.json(r))
+        .then(r=>res.json(r))
     })
-    app.post("/removearticle/:id",(req,res)=>{
+    app.post("/unsavearticle/:id",(req,res)=>{
         let id = req.params.id;
         console.log(id)
         db.Article.findOneAndUpdate({"_id":id},{saved:false})
-        .then((r)=>res.json(r))
+        .then(r=>res.json(r))
+    })
+    app.get("/articleinfo/:id",(req,res)=>{
+        currentId = req.params.id;
+        db.Article.find({"_id":currentId}).then(r=>res.json(r[0]));
+    })
+    app.post("/newnote",(req,res)=>{
+        let newNote = req.body.noteText;
+        let articleId = req.body.articleId;
+        db.Note.create({noteText:newNote})
+        .then(noteRes=>{
+            console.log(noteRes);
+            return db.Article.findOneAndUpdate({"_id":currentId}, { $push: { notes: noteRes._id } }, { new: true });
+        }).then(articleInfo=>{
+            res.json(articleInfo);
+        })
+    });
+    app.get("/noteinfo/:id",(req,res)=>{
+        let id = req.params.id;
+        db.Note.findOne({"_id":id})
+        .then(noteInfo=>{
+            res.json(noteInfo);
+        })
     })
 
 
