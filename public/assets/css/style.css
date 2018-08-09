@@ -2,12 +2,16 @@ body {
     background-color: #f9f1f1;
 }
 
-li {
+.nav-wrapper li {
     margin: 0 4px;
 }
 
 .logo {
     margin: 0 10px;
+}
+
+#notes li {
+    height: 60px;
 }
 
 #splash-img {

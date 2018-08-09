@@ -55,19 +55,19 @@ $(()=>{
         //add note to list
     })
     function drawNotes(noteIdArr){
-        var notesDiv = $("#notes");
-        notesDiv.empty();
+        var notesUl = $("#notes");
+        notesUl.empty();
         noteIdArr.forEach(noteId => {
-            var newRow = $("<div>").addClass("row valign-wrapper z-depth-1 section");
-            var noteCol = $("<div>").addClass("col s9 center")
-            var buttonCol = $("<div>").addClass("col s3");
+            var newLi = $("<li>").addClass("collection-item section");
+            var noteCol = $("<div>").addClass("left valign-wrapper")
+            var buttonCol = $("<div>").addClass("right valign-wrapper");
             $.get("/noteinfo/"+noteId,(data,status)=>{
                 console.log(data.noteText, data._id);
                 //make note with noteText and button with noteid
-                noteCol.append("<h1>").text(data.noteText);
+                noteCol.append($("<h6>").text(data.noteText));
                 buttonCol.append(`<a data-id="${data._id}" class="remove-note waves-effect waves-light btn"><i class="material-icons right">remove_circle</i>remove</a>`)
-                newRow.append(noteCol,buttonCol);
-                notesDiv.append(newRow);
+                newLi.append(noteCol,buttonCol);
+                notesUl.append(newLi);
             });
         });
     }
