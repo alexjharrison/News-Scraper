@@ -61,7 +61,7 @@
                                     <a data-id="{{this._id}}" class="delete waves-effect waves-light btn">Delete From Saved</a>
                                 </div>
                                 <div class="row center">
-                                    <a class="waves-effect waves-light btn">Article Notes</a>
+                                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Article Notes</a>
                                 </div>
                             </div>
                         </div>
@@ -71,6 +71,18 @@
         {{/if}}
     </div>
 </div> 
-
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Notes For Article: {{this._id}}</h4>
+        <div class="row">
+            <h2 class="col s8 center">A bunch of text</h2>
+            <a href="#!" class="left modal-close waves-effect waves-green btn-flat col s4"><i class="material-icons left">indeterminate_check_box</i></a>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 
 

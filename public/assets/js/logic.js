@@ -35,5 +35,5 @@ $(()=>{
             location.reload();
         })
     })
-
+    $('.modal').modal();
 })
