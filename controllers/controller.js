@@ -4,8 +4,7 @@ var request = require("request");
 
 
 module.exports = (app) => {
-    // db.Note.create({
-    //     note: "This is a note"
+    // db.Article.crea"_id"currentId:,(     note: "This is a note"
     // }).then(response=>{
     //     console.log(response);
     // })
@@ -107,6 +106,18 @@ module.exports = (app) => {
         .then(noteInfo=>{
             res.json(noteInfo);
         })
+    })
+    app.delete("/noteinfo/:id",(req,res)=>{
+        let id = req.params.id;
+        db.Note.remove({"_id":id}).then(r=>{})
+        db.Article.findByIdAndUpdate({"_id":currentId},{$pull:{notes:id}})
+        .then(r=>{
+            db.Article.findOne({"_id":currentId})
+            .then(r=>{
+                console.log(r.notes);
+                res.json(r.notes);
+            })
+        }) 
     })
 
 

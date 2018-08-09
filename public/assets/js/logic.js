@@ -46,6 +46,7 @@ $(()=>{
         e.preventDefault();
         newNoteText = $("#textBox").val();
         $("#textBox").val("");
+        if(!newNoteText) return;
         $.post("/newnote",{
             noteText:newNoteText,
             articleId:$(this).attr("data-id")
@@ -62,7 +63,6 @@ $(()=>{
             var noteCol = $("<div>").addClass("left valign-wrapper")
             var buttonCol = $("<div>").addClass("right valign-wrapper");
             $.get("/noteinfo/"+noteId,(data,status)=>{
-                console.log(data.noteText, data._id);
                 //make note with noteText and button with noteid
                 noteCol.append($("<h6>").text(data.noteText));
                 buttonCol.append(`<a data-id="${data._id}" class="remove-note waves-effect waves-light btn"><i class="material-icons right">remove_circle</i>remove</a>`)
@@ -71,4 +71,14 @@ $(()=>{
             });
         });
     }
+    $(document).on("click",".remove-note",e=>{
+        var id = $(e.target).attr("data-id");
+        $.ajax({
+            url: "/noteinfo/"+id,
+            type:"DELETE"                
+        }).then(data=>{
+            console.log(data);
+            drawNotes(data);
+        })
+    })
 })
