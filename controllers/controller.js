@@ -4,11 +4,6 @@ var request = require("request");
 
 
 module.exports = (app) => {
-    // db.Article.crea"_id"currentId:,(     note: "This is a note"
-    // }).then(response=>{
-    //     console.log(response);
-    // })
-
     var currentId;
 
     app.get("/", (req, res) => {
@@ -17,6 +12,7 @@ module.exports = (app) => {
             if (result[0]) empty = true;
             result.empty = empty;
             result.home = true;
+            console.log(result);
             res.render("index", result);
         })
     })

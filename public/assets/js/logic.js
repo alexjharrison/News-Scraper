@@ -1,6 +1,10 @@
 $(()=>{
-    
-    
+    //remove 5 blank cards that always show up for unknown reasons
+    $(".card").each(function(){
+        if($(this).attr("data-id")==="")
+            $(this).hide();
+    })
+
     $("#get-articles").click((e)=>{
         e.preventDefault();
         $.get("/newArticles",(data,status)=>{
@@ -11,14 +15,12 @@ $(()=>{
     $("#drop-articles").click((e)=>{
         e.preventDefault();
         $.get("/dropArticles",(data,status)=>{
-            console.log(data);
             location.reload();
         });
     })
     $(".save").click(function(e){
         e.preventDefault();
         var id = $(this).attr("data-id");
-        console.log(id);
         $.post("/savearticle/"+id,(data,status)=>{
             location.reload();
         })
@@ -26,7 +28,6 @@ $(()=>{
     $(".delete").click(function(e){
         e.preventDefault();
         var id = $(this).attr("data-id");
-        console.log(id);
         $.post("/unsavearticle/"+id,(data,status)=>{
             location.reload();
         })
@@ -36,7 +37,6 @@ $(()=>{
         let id = $(this).attr("data-id")
         $("#article-id").text(id);
         $.get("/articleinfo/"+id,(data,status)=>{
-            console.log(data);
             drawNotes(data.notes);
         })
         $(".modal").modal();
@@ -77,7 +77,6 @@ $(()=>{
             url: "/noteinfo/"+id,
             type:"DELETE"                
         }).then(data=>{
-            console.log(data);
             drawNotes(data);
         })
     })
