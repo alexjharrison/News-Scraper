@@ -47,3 +47,20 @@ body {
     height: 200px;
     overflow: auto;
 }
+
+@media screen and (max-width: 631px) {
+    .image-container {
+        visibility: hidden;
+    }
+    /* li button {
+        width: 300px;
+        overflow: auto;
+    } */
+    .title {
+        margin-top: 80px;
+        left: 140%;
+        visibility: visible;
+        position: relative;
+        color:black;
+    }
+}
